@@ -1,0 +1,22 @@
+.btn {
+    border: 2px solid black;
+    padding: 0px 10px;
+    color: black;
+    border-radius: 10px;
+    transition: all .4s ease-in-out;
+}
+
+.btn:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all .4s ease-in-out;
+}
+
+input, input:focus {
+    outline: 0px;
+    outline-color: white;
+    padding: 10px 15px;
+    border: 2px solid black;
+}
