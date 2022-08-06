@@ -3,6 +3,7 @@ import styles from './Menu.module.css'
 
 const Menu = (props) => {
   const { todos } = props;
+
   return (
     <div className="flex flex-row items-center justify-between border-b-2 border-black">
         
@@ -22,8 +23,8 @@ const Menu = (props) => {
             <label for="filter" className={`text-xl mr-1 ${styles.filter}`}>Filter Tasks:</label>
             <select name="filter" id="filter" className="text-xl text-center text-blue-600">
                 <option value="All">All</option>
-                <option value="Outstanding">Outstanding</option>
-                <option value="Completed">Completed</option>
+                <option value={false}>Outstanding</option>
+                <option value={true}>Completed</option>
             </select>
       </div> 
     </div>
