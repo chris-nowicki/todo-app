@@ -9,10 +9,12 @@ const Menu = (props) => {
   return (
     <div className="flex flex-col items-center justify-between border-b-2 border-black my-2 sm:w-2/5 lg:w-1/5">
         
-        {/* display remaining tasks (todo's) */}
+        {/* display remaining tasks count */}
         <div className="flex flex-row">
           <span className='text-xl'><span className='text-blue-600'>{displayRemaining.length}</span> Remaining Tasks</span>
         </div>
+
+        {/* display completed task count */}
         <div className="flex flex-row">
           <span className='text-xl'><span className='text-blue-600'>{displayCompleted.length}</span> Completed Tasks</span>
         </div>
