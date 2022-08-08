@@ -15,7 +15,7 @@ const TodoList = (props) => {
         const name = newTodoRef.current.value;
         
         // ensure user cannot enter a blank task
-        if (name === '') return
+        if (name.trim() === '') return
 
         // add task to the existing list of todos
         const newTodos = [...todos, {id: v4(), name: name, complete: false }]
