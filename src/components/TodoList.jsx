@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
 import styles from './TodoList.module.css'
 import {v4} from 'uuid' // generates a unique id
+import Todo from './Todo'
 
 const TodoList = (props) => {
-    const {todos, setTodos, STORAGE_KEY} = props;
+    const {todos, setTodos, STORAGE_KEY, filteredTodos} = props;
 
     // declare usRef variable
     const newTodoRef = useRef();
@@ -23,16 +24,17 @@ const TodoList = (props) => {
         // add todos to local storage
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newTodos))
 
-        // reset the input field for new task
+        // reset the new task input field
         newTodoRef.current.value = null;
     }
 
-    // toggles complete/not-complete for a specific task
+    // toggles task complete/not-complete
     const toggleTodo = (id) => {
         const newTodoList = [...todos];
         const todo = newTodoList.find(todo => todo.id === id);
         todo.complete = !todo.complete;
         setTodos(newTodoList);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newTodoList))
     }
 
     // deletes task
@@ -44,9 +46,10 @@ const TodoList = (props) => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(newTodos))
     }
 
+
     return (
         // add new task input and submit
-        <div className="flex flex-col items-center mt-10">
+        <div className="flex flex-col items-center mt-10 sm:w-4/5 lg:w-1/2">
             <div className="flex flex-row justify-center w-full">
                 
                 {/* new to do input field w/ newTodoRef from useRef assigned */}
@@ -63,32 +66,9 @@ const TodoList = (props) => {
                 
                 {/* iterate through the map of the todo list and display each task */}
                 {
-                    todos.map((todo) => (
-                        <div key={todo.id} className="flex flex-row w-full mt-2">
-                            {/* <label className="w-full"> */}
-                                <div className="flex flex-row w-full">
-                                        {/* display the todo */}
-                                        <span  
-                                            className={
-                                                `w-full border-b-2 border-black text-lg 
-                                                ${
-                                                    todo.complete ? 'line-through' : ''
-                                                }
-                                            `} >
-                                            {todo.name}
-                                        </span>
-                                        
-                                        {/* display checkbox */}
-                                        <input type="checkbox" className="ml-4 w-5 h-5 mt-2" checked={todo.complete} onChange={() => toggleTodo(todo.id)}/>
-                                </div>
-                            
-                            {/* display delete icon */}
-                            <div className="cursor-pointer" onClick={() => handleTaskDelete(todo.id)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mt-2 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </div>
-                        </div>
+                    
+                    filteredTodos.map((todo) => (
+                        <Todo key={ todo.id } todo = { todo } toggleTodo = { toggleTodo } handleTaskDelete = { handleTaskDelete } />
                     ))
                 }
             </div>

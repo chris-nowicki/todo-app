@@ -1,4 +1,7 @@
 select, select:focus {
-    border: 0px;
+    border: 2px solid black;
     outline: 0px solid white;
+    margin: 5px 0px 10px 0px;
+    padding: 3px 30px;
+    border-radius: 10px;
 }

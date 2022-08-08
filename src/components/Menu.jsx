@@ -1,30 +1,28 @@
 import React from 'react'
-import styles from './Menu.module.css'
+import './Menu.module.css'
 
 const Menu = (props) => {
-  const { todos } = props;
+  const { todos, setStatus } = props;
+  const displayRemaining = todos.filter(todos => todos.complete === false)
+  const displayCompleted = todos.filter(todos => todos.complete === true)
 
   return (
-    <div className="flex flex-row items-center justify-between border-b-2 border-black">
+    <div className="flex flex-col items-center justify-between border-b-2 border-black my-2 sm:w-2/5 lg:w-1/5">
         
         {/* display remaining tasks (todo's) */}
-        <div className="flex flex-row my-3">
-    
-            {
-              todos.length < 1 ? 
-              <span className='text-xl'>You do not have any tasks</span> :
-              <span className='text-xl'><span className='text-red-600'>{todos.length}</span> Remaining Tasks</span>
-            }
-
+        <div className="flex flex-row">
+          <span className='text-xl'><span className='text-blue-600'>{displayRemaining.length}</span> Remaining Tasks</span>
+        </div>
+        <div className="flex flex-row">
+          <span className='text-xl'><span className='text-blue-600'>{displayCompleted.length}</span> Completed Tasks</span>
         </div>
         
-        {/* filter task menu for completed, not complete, and all */}
+        {/* filter completed, not complete, and all tasks */}
         <div>
-            <label for="filter" className={`text-xl mr-1 ${styles.filter}`}>Filter Tasks:</label>
-            <select name="filter" id="filter" className="text-xl text-center text-blue-600">
-                <option value="All">All</option>
-                <option value={false}>Outstanding</option>
-                <option value={true}>Completed</option>
+            <select name="filter" id="filter" className="text-xl text-center text-blue-600 w-full" onChange = {(e) => setStatus(e.target.value)}>
+                <option value='all'>All</option>
+                <option value='uncompleted'>Remaining</option>
+                <option value='completed'>Completed</option>
             </select>
       </div> 
     </div>
