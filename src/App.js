@@ -14,8 +14,12 @@ function App() {
   // effect - loads stored todos in localstorage upon page refresh
   // only loads data on first page reload
   useEffect(() => {   
-    const storedTodos = JSON.parse(localStorage.getItem(STORAGE_KEY))
-    setTodos(storedTodos)
+    if (JSON.parse(localStorage.getItem(STORAGE_KEY) === null)) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([]))
+    } else {
+        const storedTodos = JSON.parse(localStorage.getItem(STORAGE_KEY))
+        setTodos(storedTodos)
+    }
   },[])
 
   // effect - updates the filteredTodos based on state when todos or status changes
